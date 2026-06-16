@@ -39,3 +39,16 @@ Rules:
 3. New information supersedes old information.
 4. Ideas are categorized before development.
 5. Not every idea becomes work.
+# AI Operating System Principle
+
+Every idea must answer one question:
+
+When does this matter?
+
+🟢 Today
+
+🟡 This Season
+
+🔵 Future
+
+If it cannot answer that question, it remains a Seed.
