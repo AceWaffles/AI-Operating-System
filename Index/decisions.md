@@ -61,3 +61,85 @@ ACTIVE
 Reason:
 
 Focus on solving collector problems rather than becoming an image repository.
+
+---
+
+## 2026-06-16
+
+Decision:
+
+Cardboard Empires V1 staging deployment uses RDP, not SMB or admin shares.
+
+Status:
+
+ACTIVE
+
+Reason:
+
+Port 445 was previously found unavailable, and admin shares such as `\\Cardboard_Emp\c$` must not be assumed.
+
+V1 deployment flow is Development PC -> Visual Studio Build -> OpenCode Publish -> Package Deployment -> RDP to Cardboard_Emp -> Execute Deploy Script.
+
+---
+
+## 2026-06-18
+
+Decision:
+
+Cardboard Empires public/static pages share the collector-room visual language until a different approved brand direction exists.
+
+Status:
+
+ACTIVE
+
+Reason:
+
+Keeps Home, About, and Community cohesive while the product is still stabilizing.
+
+---
+
+## 2026-06-18
+
+Decision:
+
+Community is a Coming Soon area, not a live social feature.
+
+Status:
+
+ACTIVE
+
+Reason:
+
+Prevents unfinished Shoutouts/Nominations workflows from presenting as active public product features.
+
+---
+
+## 2026-06-18
+
+Decision:
+
+Binder pages use left `My Empire` navigation, center global search, and reusable right rail widgets.
+
+Status:
+
+ACTIVE
+
+Reason:
+
+Creates an app-like collector workspace and avoids one-off right-side jump menus.
+
+---
+
+## 2026-06-18
+
+Decision:
+
+SetInventory should move toward paged or lazy-loaded lists instead of right rail jump menus for huge checklists.
+
+Status:
+
+ACTIVE
+
+Reason:
+
+Large set checklists need scalable navigation and a cleaner list/table experience.

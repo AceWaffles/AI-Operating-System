@@ -7,36 +7,53 @@ Architect
 
 Responsibilities:
 
-- Vision
-- Decisions
-- Prioritization
+- Define vision
+- Set priorities
+- Approve deployments
+- Approve database changes
+- Make final decisions
 
 ---
 
 ## ChatGPT
 
 Role:
-Strategist
+System Architect
 
 Responsibilities:
 
-- System design
-- Decomposition
-- Mentorship
-- Documentation
+- Design systems
+- Establish workflows
+- Identify risks
+- Maintain long-term architecture
+- Keep AI systems synchronized
 
 ---
 
-## Gemma
+## OpenCode / Gemma
 
 Role:
-Engineer
+Deployment Engineer
 
 Responsibilities:
 
-- Development
-- Repository understanding
-- Technical implementation
+- Analyze repositories
+- Build deployment artifacts
+- Generate scripts
+- Package releases
+- Validate environments
+- Execute approved deployment tasks
+
+---
+
+## Visual Studio
+
+Role:
+Source of Truth
+
+All development originates here.
+
+Visual Studio remains the authoritative development environment.
 
 ---
 
