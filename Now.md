@@ -1,7 +1,7 @@
 
 # Current State
 
-**Date:** 2026-06-18
+**Date:** 2026-06-26
 
 ## Season
 
@@ -63,25 +63,25 @@ Do not scale projects until repeatable systems exist.
 
 ---
 
-# Current Focus (2026-06-18)
+# Current Focus (2026-06-26)
 
 Goal:
 
-Transform Cardboard Empires from functional staging software into a cohesive collector-facing app while keeping AIOS memory and deployment safety intact.
+Build CardVoyager into a standalone exploration RPG inside Cardboard Empires while keeping deployment safety and AIOS memory intact.
 
 Active Build:
 
-Cardboard Empires public site and Binder app UI foundation.
+CardVoyager Phase 2 exploration prototype: Cardlandia launch flow, Pullaverse flight, Star Map catalog, and Sol as the first static destination.
 
 Success Metric:
 
-**A repeatable Cardboard Empires experience where public pages, Binder navigation, search, right rail widgets, and SetInventory workflows feel consistent and are safely documented for future AI sessions.**
+**A repeatable CardVoyager exploration loop where the Captain can launch from Cardlandia, manually navigate the Pullaverse, use the Star Map, discover a static system, enter system exploration, evaluate planets from orbit, land, and return home.**
 
 ---
 
 # Current System State
 
-Date: 2026-06-18
+Date: 2026-06-26
 
 ## Server Infrastructure
 
@@ -226,6 +226,14 @@ Latest deployment session summary:
 Latest product/UI session summary:
 
 `MorningMeetings/2026/2026-06-18-cardboard-empires-ui-session.md`
+
+Latest CardVoyager Chapter 1 summary:
+
+`MorningMeetings/2026/2026-06-25-cardvoyager-chapter1-poc.md`
+
+Latest CardVoyager Phase 2 summary:
+
+`MorningMeetings/2026/2026-06-26-cardvoyager-phase2-exploration-graphics.md`
 
 ---
 
