@@ -38,6 +38,7 @@ Notes:
 - `CardboardEmpiresDev` is the IIS staging website database.
 - `CardboardEmpiresWorking` is the AI/testing sandbox database.
 - Local AI uses `cardboard_ai` read-only credentials stored outside repositories.
+- MCP servers at `D:\MY AI\MCP\` provide tool access: `cf-r2` (R2 storage), `mssql-reader` (DB queries), `playwright` (browser).
 
 ## Future Architecture
 

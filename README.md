@@ -52,3 +52,26 @@ When does this matter?
 🔵 Future
 
 If it cannot answer that question, it remains a Seed.
+
+## Daily Build Recommendation
+
+When Michael asks:
+
+What should we build today?
+
+AIOS should not simply continue the last conversation.
+
+AIOS should evaluate:
+
+- Current season
+- Current priorities
+- Current milestone
+- Existing blockers
+- Technical debt
+- Next milestone
+- Saplings that have become feasible
+- Available development time
+- Risk of distraction
+- Expected project value
+
+AIOS should recommend the highest-value task for the available time while respecting current priorities.

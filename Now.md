@@ -1,7 +1,7 @@
 
 # Current State
 
-**Date:** 2026-06-26
+**Date:** 2026-06-29
 
 ## Season
 
@@ -44,6 +44,30 @@ Lulah owns creative direction.
 
 Goal:
 Reduce business leverage over time.
+
+---
+
+6. Mobile Site
+
+Goal:
+Get the mobile version of the site up and running this week.
+
+Status: 🔴 NOT STARTED — must build responsive layout / mobile-first views.
+
+---
+
+7. MCP Tooling
+
+Goal:
+Build MCP server infrastructure for AI tool access.
+
+Status: 🟢 DONE — 4 MCP servers registered in `D:\MY AI\opencode.json`:
+- **cf-r2** — Cloudflare R2 bucket operations (credentials in `AIOS/.secrets/vault.json`)
+- **mssql-reader** — Read-only SQL Server access to CardboardEmpiresDev
+- **playwright** — Browser automation via `@playwright/mcp`
+- **comfyui** — Local ComfyUI image generation via `D:\MY AI\MCP\comfyui\server.js`
+
+All MCP servers live at `D:\MY AI\MCP\`.
 
 ---
 
@@ -129,6 +153,16 @@ http://192.168.4.35
 
 ❌ AI cannot browse the website automatically yet
 
+## Server Access
+
+✅ WinRM connected — AI can remote into CARDBOARD_EMP
+
+✅ RDP accessible — port 3389 open
+
+✅ SQL queries work via `cardboard_ai`
+
+Credentials: `D:\MY AI\Repos\AI-Operating-System\.secrets\vault.json`
+
 ## Cloudflare Status
 
 ❌ DNS not configured
@@ -136,6 +170,8 @@ http://192.168.4.35
 ❌ Tunnel not configured
 
 ❌ R2 integration not connected
+
+⚠️ Cloudflare creds go in `AIOS/.secrets/vault.json` — not yet populated
 
 ## Deployment Status
 
@@ -217,7 +253,7 @@ Current AI DB identity:
 
 `cardboard_ai` read-only.
 
-Current AI SQL connection details are stored locally in `D:\MY AI\.env` and documented in `Index/infrastructure.md`. Do not print or store the password in AIOS, repositories, appsettings files, scripts, or deployment packages.
+Current AI SQL connection details are stored locally in `AIOS/.secrets/vault.json` and documented in `Index/infrastructure.md`. Do not print or store the password in AIOS, repositories, appsettings files, scripts, or deployment packages.
 
 Latest deployment session summary:
 

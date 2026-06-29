@@ -37,30 +37,59 @@ Rules:
 
 Local AI connection settings are stored outside repositories in:
 
-`D:\MY AI\.env`
+`D:\MY AI\Repos\AI-Operating-System\.secrets\vault.json`
 
 Rules:
 
-- `.env` is ignored by `D:\MY AI\.gitignore`.
+- `vault.json` is ignored by `D:\MY AI\.gitignore`.
 - The active AI SQL user is `cardboard_ai`.
 - The active AI database is `CardboardEmpiresDev` unless Michael explicitly selects `CardboardEmpiresWorking`.
 - Never print or copy the password into AIOS, repositories, deployment packages, appsettings files, or chat summaries.
 - Use this connection for read-only inspection only.
 
-Expected `.env` keys:
+Expected `vault.json` keys:
 
-```env
-DB_SERVER=192.168.4.35
-DB_DATABASE=CardboardEmpiresDev
-DB_USER=cardboard_ai
-DB_PASSWORD=<stored locally only>
-DB_TRUST_SERVER_CERTIFICATE=true
+```json
+{
+  "database": { "server": "192.168.4.35", "database": "CardboardEmpiresDev", "user": "cardboard_ai" },
+  "cardboardEmp": { "host": "192.168.4.35" },
+  "cloudflare": { "accountId": "..." }
+}
 ```
+
+## CARDBOARD_EMP Server Access
+
+AI can connect to CARDBOARD_EMP via WinRM using credentials from `D:\MY AI\Repos\AI-Operating-System\.secrets\vault.json`.
+
+```
+CARDBOARD_EMP\cardboard_admin  /  password in .env.json
+Host: 192.168.4.35
+WinRM: port 5985
+RDP: port 3389
+```
+
+Connection script: `D:\MY AI\Scripts\Connect-CardboardEmp.ps1`
+- First run prompts for creds and saves encrypted XML
+- Supports `-RDP` flag for Remote Desktop
+- `vault.json` is gitignored and excluded from repos
 
 ## Cloudflare R2 Image Path Direction
 
-Images are expected to live in Cloudflare R2 and be served through the Cardboard Empires image CDN.
+Images live in Cloudflare R2 bucket `ce-images`, served through the CDN at `https://images.cardboardempires.me`.
 
 `SetCheckItems.FrontImageId` and `SetCheckItems.BackImageId` are part of the CDN path.
 
 `Sets.ImageFolder` exists in current application code and should be present in the database, but it may remain nullable as image path handling evolves.
+
+### AI Access (MCP Servers)
+
+Registered in `D:\MY AI\opencode.json`. All servers live at `D:\MY AI\MCP\`.
+
+| Server | Purpose | Source |
+|--------|---------|--------|
+| `cf-r2` | Cloudflare R2 object storage | `D:\MY AI\MCP\cf-r2\server.js` |
+| `mssql-reader` | Read-only SQL Server access to CardboardEmpiresDev | `npx @connorbritain/mssql-mcp-reader` |
+| `playwright` | Browser automation for web testing | `npx @playwright/mcp` |
+| `comfyui` | Local image generation through ComfyUI/JuggernautXL | `D:\MY AI\MCP\comfyui\server.js` |
+
+See `Index/connection-locations.md` for full tool lists per server.
