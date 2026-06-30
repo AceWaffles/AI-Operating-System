@@ -98,3 +98,43 @@ Future development
 Success metric:
 
 A collector can digitize an entire collection with minimal manual effort while producing high-quality, searchable digital records that support the broader Cardboard Empires ecosystem.
+
+---
+
+## 2026-06-29 Image Acquisition Prototype Notes
+
+Status:
+
+Prototype started in `D:\MY AI\Repos\CardboardEmpiresDev\CardboardEmpires.CardCapture`.
+
+What was completed:
+
+- Created a dedicated `.NET 9` console project: `CardboardEmpires.CardCapture`.
+- Added OpenCV support through `OpenCvSharp4` and `OpenCvSharp4.runtime.win`.
+- Proved direct camera capture from the Insta360/camera rail setup.
+- Confirmed the Insta360 app must be closed before the capture tool can access the camera.
+- Generated printable capture sheet prototypes.
+- Current preferred sheet is a US Letter 3x2 horizontal-card layout in `D:\MY AI\Lobby\Outbox\card-imaging-sheet-letter-horizontal-3x2.pdf`.
+- Created a first `process` command that outputs six files named `A1.jpg`, `A2.jpg`, `B1.jpg`, `B2.jpg`, `C1.jpg`, and `C2.jpg`.
+
+Important result:
+
+The pipeline can capture a camera image, detect the printed page well enough for first-pass perspective correction, and create six separate image files. This proves the acquisition pipeline plumbing.
+
+Important failure:
+
+The first crop implementation is geometrically poor. It can distort card width/height and is not suitable for final card scans. The current fixed-coordinate crop approach should be replaced by per-slot rectangle detection and per-card perspective correction.
+
+Next technical direction:
+
+- Preserve raw captures.
+- Detect page fiducials or page corners.
+- Correct page perspective.
+- Detect each slot's actual black rectangle/corner anchors.
+- Perspective-transform each card individually to a fixed card ratio such as `1400x1000` for horizontal scans.
+- Add glare/blur/crop-confidence scoring before OCR.
+- Add OCR and checklist matching only after geometry is stable.
+
+Architecture note:
+
+Local Windows capture should remain first because camera hardware access is simplest outside Docker. Later, folder-based image processing can move into MCP/Docker AI Hotel tooling.
