@@ -1,7 +1,7 @@
 
 # Current State
 
-**Date:** 2026-06-29
+**Date:** 2026-07-01
 
 ## Season
 
@@ -52,7 +52,7 @@ Reduce business leverage over time.
 Goal:
 Get the mobile version of the site up and running this week.
 
-Status: 🔴 NOT STARTED — must build responsive layout / mobile-first views.
+Status: DONE - mobile Collector Mode is live for Binder home, Sets, and My Cards. Mobile is intentionally collector-first, while desktop remains collection-management oriented.
 
 ---
 
@@ -87,25 +87,25 @@ Do not scale projects until repeatable systems exist.
 
 ---
 
-# Current Focus (2026-06-26)
+# Current Focus (2026-07-01)
 
 Goal:
 
-Build CardVoyager into a standalone exploration RPG inside Cardboard Empires while keeping deployment safety and AIOS memory intact.
+Keep Cardboard Empires production stable after the mobile Collector Mode launch while preserving deployment, R2 image-library, and AIOS handoff memory.
 
 Active Build:
 
-CardVoyager Phase 2 exploration prototype: Cardlandia launch flow, Pullaverse flight, Star Map catalog, and Sol as the first static destination.
+Production validation and image-library upload readiness. Marvel Masterpieces Platinum local images are fully audited against DB image keys and ready for approved R2 upload.
 
 Success Metric:
 
-**A repeatable CardVoyager exploration loop where the Captain can launch from Cardlandia, manually navigate the Pullaverse, use the Star Map, discover a static system, enter system exploration, evaluate planets from orbit, land, and return home.**
+**A repeatable deploy/verify/audit workflow where future AIs can deploy safely, confirm public/authenticated production health, and upload audited card images without rediscovering server, vault, or R2 details.**
 
 ---
 
 # Current System State
 
-Date: 2026-06-26
+Date: 2026-07-01
 
 ## Server Infrastructure
 
@@ -147,11 +147,15 @@ http://localhost
 
 http://192.168.4.35
 
+✅ Public production verified:
+
+https://cardboardempires.org/
+
 ## AI Integration Status
 
 ✅ AI can query SQL read-only through `cardboard_ai` using local `.env`
 
-❌ AI cannot browse the website automatically yet
+✅ AI can browse and verify the website through Playwright.
 
 ## Server Access
 
@@ -165,47 +169,25 @@ Credentials: `D:\MY AI\Repos\AI-Operating-System\.secrets\vault.json`
 
 ## Cloudflare Status
 
-❌ DNS not configured
+✅ Public domain routing is working for `cardboardempires.org`.
 
-❌ Tunnel not configured
+✅ Cloudflare R2 credentials are available through `AIOS/.secrets/vault.json` and the `cf-r2` MCP server.
 
-❌ R2 integration not connected
-
-⚠️ Cloudflare creds go in `AIOS/.secrets/vault.json` — not yet populated
+⚠️ Image object upload may lag DB image-key readiness. CDN 404s are expected for sets whose R2 prefix has not been uploaded yet.
 
 ## Deployment Status
 
-✅ ZIP deployment package operational
+✅ Production deployment scripts and runbook exist in `CardboardEmpiresDev`.
 
-⚠️ One-button deployment not built yet
+✅ Latest production deploy verified with public and authenticated Playwright checks.
 
 ## Next Milestone
 
-M3 - AI Integration
+M3 - Production Stability And Image Library
 
 Goals:
 
-Local AI
-
-↓
-
-Read SQL
-
-↓
-
-Read Website
-
-↓
-
-Cloudflare
-
-↓
-
-R2 Uploads
-
-↓
-
-One-button Deployments
+Maintain safe deploys, authenticated production verification, and audited R2 image uploads.
 
 ---
 
@@ -255,11 +237,11 @@ Current AI DB identity:
 
 Current AI SQL connection details are stored locally in `AIOS/.secrets/vault.json` and documented in `Index/infrastructure.md`. Do not print or store the password in AIOS, repositories, appsettings files, scripts, or deployment packages.
 
-Latest deployment session summary:
+Latest deployment/session summary:
 
-`MorningMeetings/2026/2026-06-16-cardboard-deployment-session.md`
+`MorningMeetings/2026/2026-07-01-cardboard-mobile-production-image-handoff.md`
 
-Latest product/UI session summary:
+Previous product/UI session summary:
 
 `MorningMeetings/2026/2026-06-18-cardboard-empires-ui-session.md`
 
@@ -287,10 +269,10 @@ Staging
 
 Production
 
-* Future public Cardboard Empires hosting environment
-* **Status:** INACTIVE — not deployable
-* `appsettings.Production.json` contains placeholder values only
-* A real connection string and hosting infrastructure must be configured before any Production deployment
+* Public Cardboard Empires hosting on `CARDBOARD_EMP` / IIS
+* **Status:** ACTIVE
+* Public URL: `https://cardboardempires.org/`
+* Server-local `appsettings.Production.json` contains the real Integrated Security connection string and must not be overwritten by repo placeholders.
 
 ---
 

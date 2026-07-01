@@ -143,3 +143,51 @@ ACTIVE
 Reason:
 
 Large set checklists need scalable navigation and a cleaner list/table experience.
+
+---
+
+## 2026-07-01
+
+Decision:
+
+Cardboard Empires mobile and desktop experiences serve different jobs.
+
+Status:
+
+ACTIVE
+
+Reason:
+
+Mobile is collector interaction: quick binder/card browsing, 4-card carousel pages, drawers, sheets, one-handed quantity edits, and front/back flipping. Desktop remains collection management: dense tables, power-user controls, and larger-screen organization.
+
+---
+
+## 2026-07-01
+
+Decision:
+
+Production server-local configuration is authoritative for the real production connection string.
+
+Status:
+
+ACTIVE
+
+Reason:
+
+The repository `appsettings.Production.json` remains a non-secret placeholder. Deployment must preserve the server-local Integrated Security connection string or login/authenticated pages can fail with 500 errors.
+
+---
+
+## 2026-07-01
+
+Decision:
+
+Card image upload readiness is proven by DB/local audit before R2 upload.
+
+Status:
+
+ACTIVE
+
+Reason:
+
+`SetCheckItems.FrontImageId` and `BackImageId` define the application URL contract. Local files must match exact expected image-key paths before upload; generic placeholders do not satisfy missing exact paths.

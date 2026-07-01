@@ -5,6 +5,7 @@
 Server: CARDBOARD_EMP  
 Internal IP: 192.168.4.35  
 Website URL: http://192.168.4.35  
+Public production URL: https://cardboardempires.org/
 Primary website database: CardboardEmpiresDev  
 AI/testing sandbox database: CardboardEmpiresWorking
 
@@ -32,6 +33,7 @@ Rules:
 - Database modifications require Michael approval.
 - Deployment/migration rights for `cardboard_deploy` require approval before elevation.
 - Do not store SQL passwords in repositories, scripts, ZIPs, or appsettings files.
+- Production `appsettings.Production.json` on the server must keep the server-local Integrated Security connection string and must not be overwritten by the repository placeholder.
 
 ## Local AI SQL Connection
 
@@ -73,6 +75,44 @@ Connection script: `D:\MY AI\Scripts\Connect-CardboardEmp.ps1`
 - Supports `-RDP` flag for Remote Desktop
 - `vault.json` is gitignored and excluded from repos
 
+Known access note from 2026-07-01:
+
+- WinRM works by IP `192.168.4.35`.
+- The host name `CARDBOARD_EMP` may need TrustedHosts configuration if used directly.
+- `D:\MY AI\Scripts\Connect-CardboardEmp.ps1` and `D:\MY AI\cardboard_admin.cred.xml` were referenced by older notes but were not present during the 2026-07-01 session.
+
+## Cardboard Empires Production Deployment
+
+IIS site/app pool:
+
+`CardboardEmpires`
+
+Target path:
+
+`C:\inetpub\CardboardEmpires`
+
+Verified production backup from 2026-06-30:
+
+`C:\inetpub\CardboardEmpires_Backups\verified-current-20260630-163041`
+
+Backup contents:
+
+- `db-CardboardEmpiresDev.bak`
+- `web.zip`
+- `web-files\`
+
+Deployment docs/scripts in `D:\MY AI\Repos\CardboardEmpiresDev`:
+
+- `docs\production-deployment.md`
+- `tools\deployment\New-CardboardDeploymentArtifacts.ps1`
+- `tools\deployment\Invoke-CardboardProductionDeploy.ps1`
+
+Operational notes:
+
+- SQL Server Express does not support `BACKUP DATABASE ... WITH COMPRESSION`.
+- SQL service may not be able to write directly to `C:\inetpub\CardboardEmpires_Backups`; deployment script backs up to SQL's default backup directory and then copies.
+- Normal local builds can fail if `devenv.exe` or `iisexpress.exe` locks `bin\Debug`; use isolated output for validation.
+
 ## Cloudflare R2 Image Path Direction
 
 Images live in Cloudflare R2 bucket `ce-images`, served through the CDN at `https://images.cardboardempires.me`.
@@ -93,3 +133,29 @@ Registered in `D:\MY AI\opencode.json`. All servers live at `D:\MY AI\MCP\`.
 | `comfyui` | Local image generation through ComfyUI/JuggernautXL | `D:\MY AI\MCP\comfyui\server.js` |
 
 See `Index/connection-locations.md` for full tool lists per server.
+
+### Image Audit Workflow
+
+Reusable repo instructions and script:
+
+- `D:\MY AI\Repos\CardboardEmpiresDev\docs\image-library-r2-audit.md`
+- `D:\MY AI\Repos\CardboardEmpiresDev\tools\image-library\Test-CardImageSet.ps1`
+
+2026-07-01 Marvel Masterpieces Platinum audit:
+
+- DB set: `SetId=4`, `2024 Marvel Masterpieces '92 Platinum`
+- `Sets.ImageFolder=2024_upper_deck_marvel_masterpieces_'92_platinum`
+- Local root: `D:\MY AI\Lobby\Outbox\tcdb\2024_upper_deck_marvel_masterpieces_'92_platinum`
+- DB rows: `3270`
+- DB front/back references: `6540`
+- Unique expected images: `470`
+- Local JPGs: `470`
+- Missing: `0`
+- Extra local JPGs: `0`
+- R2 prefix was empty at audit time: `2024_upper_deck_marvel_masterpieces_'92_platinum/`
+
+Audit outputs were generated under:
+
+`C:\Users\Micha\AppData\Local\Temp\opencode\mmp-audit\`
+
+Use `cf-r2` MCP for upload only after audit approval. DB image keys can exist before R2 objects; CDN 404s are expected until upload completes.
